@@ -26,14 +26,13 @@ Part B: How would you modify the code so that reassigning `playlist2.songCount` 
 
 ### Response 1
 
-Your response...
+The console will print 15 because playlist1 and playlist2 both point to the same object, so changing one changes the other.
 
 **Corrected Code:**
 
 ```js
-// fix this!
 const playlist1 = { name: "My Favorites", songCount: 10 };
-const playlist2 = playlist1;
+const playlist2 = { ...playlist1 };
 playlist2.songCount = 15;
 console.log(playlist1.songCount);
 ```
@@ -49,7 +48,9 @@ const students = [
   { name: "Destiny", grade: 88, passed: true },
   { name: "Marcus", grade: 95, passed: true }
 ];
+
 ```
+
 
 For each task below, identify which array method (forEach, filter, map, find, or reduce) you would use.
 
@@ -61,7 +62,10 @@ For each task below, identify which array method (forEach, filter, map, find, or
 ### Response 2
 
 Your response...
-
+//filter – to get students above 85.
+//find – to get the student named Destiny.
+//reduce – to calculate the average grade.
+//map – to create the "Name: grade" strings.
 ---
 
 ## Prompt 3
@@ -75,6 +79,7 @@ const letters = ['a', 'b', 'c', 'd'];
 const capitalize = (str) => str.toUpperCase();
 
 const upperCaseLetters = letters.map(capitalize());
+
 // Uncaught TypeError: Cannot read properties of undefined (reading 'toUpperCase')
 
 console.log(upperCaseLetters);
@@ -83,6 +88,11 @@ console.log(upperCaseLetters);
 ### Response 3
 
 Your response...
+The error happens because `capitalize()` is being called immediately, so `map` receives the result of the function call (which is `undefined`) instead of the function itself. Then `map` tries to call `.toUpperCase()` on `undefined`, causing the error. To fix it, pass the function reference itself instead of calling it, and to avoid this in the future, always pass the callback by name (or wrap it in an arrow function) rather than invoking it.
+
+```js
+const upperCaseLetters = letters.map(capitalize);
+```
 
 ---
 
@@ -112,3 +122,10 @@ const grandTotal = orders.reduce((sum, order) => {
 ### Response 4
 
 Your response...
+Part A:
+grandTotal will be 135 because 45 + 23 + 67 = 135.
+part B : The 0 is the starting value for the sum. It’s important because it makes sure the total begins at 0 and prevents errors when adding the first item.
+part C: 
+sum starts at 0
+order is the first object: { id: 1, total: 45 }
+It returns 45, which becomes the new sum for the next round
